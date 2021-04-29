@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <title>Delete Posts</title>
+</head>
+<body>
+    <form name="deleteForm" action="DeletePost.php" method="post">
+            <?php
+                $mysqli = new mysqli("mysql.eecs.ku.edu","carlosdevera","ois3Phai","carlosdevera");
+                if($mysqli->connect_errno){
+                    echo "<p>Connection Failed</p>";
+                    exit();
+                }
+
+                $query = "SELECT content, author_id FROM Posts";
+
+                echo "<table border=\"1\">";
+                echo "<tr><td>Delete?</td><td>Posts</td><td>Author</td></tr>";
+                if($result = $mysqli->query($query)){
+                    while($row = $result->fetch_assoc()){
+                        echo "<tr><td><input type=\"checkbox\" name=\"posts[]\" value=\"".$row["content"]."\"></td>";
+                        echo "<td>".$row["content"]."</td><td>".$row["author_id"]."</td></tr>";
+                    }
+                
+                    $result->free();
+                }
+
+                echo"</table>";
+
+                $mysqli->close();
+            ?>
+        <br />
+        <input type = "submit" value="Submit">
+    </form>
+</body>
+
+<!-- <table cellspacing="0" rules="all" border="1" id="Table1" style="border-collapse: collapse;">
+    <tr><td>Delete?</td><td style="width:80px">Posts</td><td style="width:120px">Author</td></tr>
+</table> -->
+
+<!-- echo "<tr><td><input type="checkbox" name="posts[]" value=".$row["content"]."></td>";
+    echo "<td>".$row["content"]."</td>";
+    echo "<td>".$row["author_id"]."</td></tr>"; -->

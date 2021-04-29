@@ -2,7 +2,7 @@
 $mysqli = new mysqli("mysql.eecs.ku.edu","carlosdevera","ois3Phai","carlosdevera");
 $newUser = $_POST["user"];
 $present = FALSE;
-echo "<p>".$newUser. "</p>";
+//echo "<p>".$newUser. "</p>";
 if($mysqli->connect_errno){
      echo "<p>Connection Failed</p>";
      exit();
@@ -35,5 +35,7 @@ if ($newUser != ""){
 else{
     echo "<p>Cannot have a blank username</p><br>";
 }
+
+$mysqli->close();
 
 ?>
